@@ -1,0 +1,16 @@
+streamlit
+pandas
+numpy
+matplotlib
+scikit-learn
+seaborn
+plotly
+
+xlrd
+scikit-learn
+lightgbm  
+xgboost 
+nltk
+wordcloud
+arabic-reshaper
+python-bidi
