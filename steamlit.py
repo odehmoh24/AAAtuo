@@ -564,7 +564,7 @@ if choise == "Data Analysis" and df is not None and model_choice_auto == "NLP":
     processed_df,
     text_column=txcol,  # change if needed
     label_column=lbcol,
-    n=1  # 1=unigram, 2=bigram, 3=trigram
+    n=3  # 1=unigram, 2=bigram, 3=trigram
 )
 
      
@@ -1154,4 +1154,5 @@ if split == "yes":
                                   index=[f"Actual {c}" for c in sorted(set(y_test))]))
 
         st.session_state.best_model = suggested_model
+
         st.session_state.best_acc = accuracy_score(y_test, preds)
