@@ -732,8 +732,8 @@ if choise == "Data Analysis" and df is not None and model_choice_auto == "ML":
 
 
 # ---------------- Auto AI System (Original) ----------------
-model_choise=""
-
+model_choise=None
+Donn=0
 if choise == "Auto AI system":
     model_choice = st.selectbox(
         "Choose your AI model", [" ", "ML", "NLP", "auto choise"], key="main_model_select"
@@ -743,10 +743,11 @@ if choise == "Auto AI system":
     # --- Auto detect system ---
     if model_choice == "auto choise" and df is not None:
          st.success(model_choice_auto)
+         model_choice=model_choice_auto
 
 
     # --- ML Scope ---
-    if (model_choice_auto == "ML" or model_choice_auto == "ML") and df is not None:
+    if model_choice== "ML"  and df is not None: 
         superviseML = st.selectbox(
             "Is the data supervised?", [" ", "supervise", "unsupervise", "auto choise"]
         )
@@ -804,7 +805,7 @@ if choise == "Auto AI system":
         "LightGBM",
         "XGBoost",
         "all of them",
-        "let AI choose"
+        "Auto Chiose"
     ]
 
    
@@ -822,7 +823,7 @@ if type_of_task == "Classification" or type_Oftask_ai == "Classification":
 		suggested_model = classification_model_name
 
 
-	if classification_model_name == "let AI choose":
+	if classification_model_name == "Auto Chiose":
 
 		if "suggested_models_list" not in st.session_state:
 			st.session_state.suggested_models_list = []
@@ -917,7 +918,7 @@ regression_models = [
           "Gradient Boosting Regressor", 
           "XGBoost Regressor",        
           "Huber Regressor",         
-          "let AI choose" ,
+          "Auto Chiose" ,
              "all them"           
               ]
 
@@ -931,7 +932,7 @@ if type_of_task == "Regression" or type_Oftask_ai == "Regression":
         key="reg_model_box"
            )
 
-          if Regression_model_name == "let AI choose":
+          if Regression_model_name == "Auto Chiose":
 
         # تهيئة session_state
             if "suggested_models_list" not in st.session_state:
@@ -1154,5 +1155,4 @@ if split == "yes":
                                   index=[f"Actual {c}" for c in sorted(set(y_test))]))
 
         st.session_state.best_model = suggested_model
-
         st.session_state.best_acc = accuracy_score(y_test, preds)
