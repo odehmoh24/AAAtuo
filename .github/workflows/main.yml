@@ -17,4 +17,4 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git push --force https://odeh_abuzaid:$HF_TOKEN@huggingface.co/spaces/oddeehh/lllaaasssttt main
+          git push --force https://oddeehh:$HF_TOKEN@huggingface.co/spaces/oddeehh/lllaaasssttt main
