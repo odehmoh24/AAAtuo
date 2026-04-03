@@ -322,6 +322,13 @@ def load_lottieurl(url: str):
 lottie_url = "https://lottie.host/8863f699-4d2b-4573-8321-72f1076b1070/fXm2FqV246.json"
 lottie_ai = load_lottieurl(lottie_url)		
 
+with st.sidebar:
+    if lottie_ai_animation:
+        st_lottie(lottie_ai_animation, height=200, key="ai_sidebar")
+    else:
+        st.write("🤖 **Auto AI System**")
+
+
 if lottie_ai:
     st_lottie(lottie_ai, height=300, key="main_anim")
 
