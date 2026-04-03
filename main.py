@@ -177,7 +177,7 @@ with st.sidebar:
 
     if Data and df is not None:
     # الحصول على اسم الملف لفحص الامتداد
-        name = Data.name
+         name = Data.name
     
     # استخراج الأعمدة التي نوعها Object فقط (نصوص أو تصنيفات)
         obj_cols = df.select_dtypes(include=['object']).columns
