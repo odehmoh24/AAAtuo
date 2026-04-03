@@ -59,21 +59,26 @@ import streamlit as st
 from streamlit_lottie import st_lottie
 import requests
 
-# دالة لتحميل الأنيميشن من رابط (URL)
-def load_lottieurl(url):
-    r = requests.get(url)
-    if r.status_code != 200:
+# دالة محسنة للتحميل مع معالجة الأخطاء
+def load_lottieurl(url: str):
+    try:
+        r = requests.get(url, timeout=5) # إضافة وقت انتظار لضمان عدم تعليق الكود
+        if r.status_code != 200:
+            return None
+        return r.json()
+    except:
         return None
-    return r.json()
 
-# اختر أنيميشن يعبر عن الذكاء الاصطناعي أو البيانات
-# يمكنك البحث عن روابط أخرى في موقع LottieFiles
-lottie_ai_animation = load_lottieurl("https://assets10.lottiefiles.com/packages/lf20_prevwnu6.json")
+# استخدم هذا الرابط (رابط مباشر ومستقر حالياً لذكاء اصطناعي)
+lottie_url = "https://lottie.host/8863f699-4d2b-4573-8321-72f1076b1070/fXm2FqV246.json"
+lottie_ai_animation = load_lottieurl(lottie_url)
 
-# عرض الأنيميشن في المكان الذي تريده (مثلاً في السايدبار أو الصفحة الرئيسية)
+# التحقق: لا تعرض الأنيميشن إلا إذا نجح التحميل
 with st.sidebar:
-    st_lottie(lottie_ai_animation, height=200, key="ai_sidebar")
-
+    if lottie_ai_animation:
+        st_lottie(lottie_ai_animation, height=200, key="ai_sidebar")
+    else:
+        st.write("🤖 **Auto AI System**") # نص بديل في حال فشل التحميل
 
 
 st.markdown("""
