@@ -61,43 +61,80 @@ import requests
 
 
 
-with st.sidebar:
-    if lottie_ai_animation:
-        st_lottie(lottie_ai_animation, height=200, key="ai_sidebar")
-    else:
-        st.write("🤖 **Auto AI System**") # نص بديل في حال فشل التحميل
-
-
 st.markdown("""
     <style>
-    /* تغيير الخلفية للون كحلي داكن فخم */
+    /* 1. خلفية التطبيق بالكامل (متدرجة داكنة) */
     .stApp {
-        background: linear-gradient(135deg, #0e1117 0%, #161b22 100%);
-        color: #ffffff;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        color: #f8fafc;
+    }
+
+    /* 2. تخصيص القائمة الجانبية (Sidebar) */
+    section[data-testid="stSidebar"] {
+        background-color: rgba(30, 41, 59, 0.7) !important;
+        backdrop-filter: blur(10px); /* تأثير الزجاج الضبابي */
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* 3. تجميل الأزرار (Buttons) */
+    .stButton>button {
+        width: 100%;
+        border-radius: 12px;
+        border: none;
+        background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
+        color: white;
+        padding: 12px 24px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     }
     
-    /* تجميل البطاقات (Cards) لتظهر بلمسة زجاجية */
+    .stButton>button:hover {
+        transform: translateY(-2px); /* رفعة بسيطة عند المرور بالماوس */
+        box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4);
+        background: linear-gradient(90deg, #60a5fa 0%, #3b82f6 100%);
+        color: white;
+    }
+
+    /* 4. صناديق الإحصائيات (Metrics) */
     div[data-testid="stMetric"] {
-        background-color: rgba(255, 255, 255, 0.05);
+        background: rgba(255, 255, 255, 0.03);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 20px;
+        padding: 15px;
+        border-radius: 16px;
+        backdrop-filter: blur(5px);
+    }
+
+    /* 5. تجميل صندوق رفع الملفات (File Uploader) */
+    section[data-testid="stFileUploadDropzone"] {
+        background: rgba(255, 255, 255, 0.02);
+        border: 2px dashed #3b82f6;
         border-radius: 15px;
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     }
 
-    /* تغيير لون النصوص داخل الـ Metrics */
-    div[data-testid="stMetricValue"] {
-        color: #00d4ff !important;
-    }
+    /* 6. إخفاء قائمة Streamlit الافتراضية و Footer */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
 
-    /* تحسين شكل السايدبار (Sidebar) */
-    section[data-testid="stSidebar"] {
-        background-color: #0d1117;
-        border-right: 1px solid rgba(255, 255, 255, 0.1);
+    /* 7. تجميل الجداول (Dataframes) */
+    .stDataFrame {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    
+    /* نص العناوين الرئيسية */
+    h1, h2, h3 {
+        font-family: 'Inter', sans-serif;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        background: -webkit-linear-gradient(#eee, #333);
+        -webkit-background-clip: text;
+        /* -webkit-text-fill-color: transparent; */
     }
     </style>
     """, unsafe_allow_html=True)
-
 
 df = None
 file_name = ""
