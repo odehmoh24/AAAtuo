@@ -311,26 +311,28 @@ import streamlit as st
 from streamlit_lottie import st_lottie
 import requests
 
-# 1. دالة التحميل المستقرة
 def load_lottieurl(url: str):
     try:
         r = requests.get(url, timeout=10)
-        return r.json() if r.status_code == 200 else None
+        if r.status_code == 200:
+            return r.json()
+        return None
     except:
         return None
-# يمكنك تغيير الرابط لأي أنميشن آخر من موقع LottieFiles
-lottie_url = "https://lottie.host/8863f699-4d2b-4573-8321-72f1076b1070/fXm2FqV246.json"
-lottie_ai = load_lottieurl(lottie_url)		
 
+# 2. تعريف المتغير (هذا هو السطر المفقود الذي يسبب الخطأ)
+# تأكد أن الاسم هنا يطابق تماماً الاسم في السطر 65
+lottie_url = "https://lottie.host/8863f699-4d2b-4573-8321-72f1076b1070/fXm2FqV246.json"
+lottie_ai_animation = load_lottieurl(lottie_url) 
+
+# --- بقية كود الموقع ---
+
+# السطر 64 و 65 الآن سيعملان بدون مشاكل:
 with st.sidebar:
-    if lottie_ai_animation:
+    if lottie_ai_animation:  # الآن بايثون يعرف هذا الاسم
         st_lottie(lottie_ai_animation, height=200, key="ai_sidebar")
     else:
         st.write("🤖 **Auto AI System**")
-
-
-if lottie_ai:
-    st_lottie(lottie_ai, height=300, key="main_anim")
 
 # 4. عنوان الموقع تحت الأنميشن مباشرة
 st.markdown("<h1 style='text-align: center;'>Auto AI System</h1>", unsafe_allow_html=True)
