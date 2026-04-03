@@ -63,75 +63,81 @@ import requests
 
 st.markdown("""
     <style>
-    /* 1. خلفية التطبيق بالكامل (متدرجة داكنة) */
+    /* 1. الخلفية الكونية العميقة */
     .stApp {
-        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-        color: #f8fafc;
+        background: radial-gradient(circle at top right, #1e293b, #0f172a, #020617);
+        color: #e2e8f0;
     }
 
-    /* 2. تخصيص القائمة الجانبية (Sidebar) */
+    /* 2. تأثير التوهج للبطاقات (Cards) والسايدبار */
     section[data-testid="stSidebar"] {
-        background-color: rgba(30, 41, 59, 0.7) !important;
-        backdrop-filter: blur(10px); /* تأثير الزجاج الضبابي */
-        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(15, 23, 42, 0.8) !important;
+        backdrop-filter: blur(20px);
+        border-right: 1px solid rgba(0, 191, 255, 0.2);
+        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
     }
 
-    /* 3. تجميل الأزرار (Buttons) */
+    /* 3. الأزرار النيون (Neon Buttons) */
     .stButton>button {
         width: 100%;
-        border-radius: 12px;
-        border: none;
-        background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
-        color: white;
-        padding: 12px 24px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    }
-    
-    .stButton>button:hover {
-        transform: translateY(-2px); /* رفعة بسيطة عند المرور بالماوس */
-        box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4);
-        background: linear-gradient(90deg, #60a5fa 0%, #3b82f6 100%);
-        color: white;
-    }
-
-    /* 4. صناديق الإحصائيات (Metrics) */
-    div[data-testid="stMetric"] {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 15px;
-        border-radius: 16px;
-        backdrop-filter: blur(5px);
-    }
-
-    /* 5. تجميل صندوق رفع الملفات (File Uploader) */
-    section[data-testid="stFileUploadDropzone"] {
-        background: rgba(255, 255, 255, 0.02);
-        border: 2px dashed #3b82f6;
+        background: transparent;
+        color: #00f2ff;
+        border: 2px solid #00f2ff;
         border-radius: 15px;
+        padding: 15px;
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: all 0.4s ease;
+        box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
     }
 
-    /* 6. إخفاء قائمة Streamlit الافتراضية و Footer */
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: hidden;}
-
-    /* 7. تجميل الجداول (Dataframes) */
-    .stDataFrame {
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-        overflow: hidden;
+    .stButton>button:hover {
+        background: #00f2ff;
+        color: #0f172a;
+        box-shadow: 0 0 40px rgba(0, 242, 255, 0.6);
+        transform: scale(1.03);
     }
-    
-    /* نص العناوين الرئيسية */
-    h1, h2, h3 {
-        font-family: 'Inter', sans-serif;
-        font-weight: 800;
-        letter-spacing: -0.02em;
-        background: -webkit-linear-gradient(#eee, #333);
+
+    /* 4. تخصيص صناديق الإدخال (Inputs) لتكون شفافة */
+    .stTextInput>div>div>input, .stFileUploader section {
+        background-color: rgba(255, 255, 255, 0.03) !important;
+        border: 1px solid rgba(0, 242, 255, 0.3) !important;
+        border-radius: 12px !important;
+        color: #00f2ff !important;
+    }
+
+    /* 5. تأثير الـ Metrics (الإحصائيات) المتوهجة */
+    div[data-testid="stMetric"] {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        padding: 20px;
+        border-left: 5px solid #00f2ff;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    }
+
+    /* 6. تحريك العناوين (Animation) */
+    h1 {
+        background: linear-gradient(90deg, #00f2ff, #0066ff);
         -webkit-background-clip: text;
-        /* -webkit-text-fill-color: transparent; */
+        -webkit-text-fill-color: transparent;
+        animation: glow 2s ease-in-out infinite alternate;
+        font-size: 3rem !important;
+        text-align: center;
+    }
+
+    @keyframes glow {
+        from { filter: drop-shadow(0 0 5px rgba(0, 242, 255, 0.4)); }
+        to { filter: drop-shadow(0 0 20px rgba(0, 242, 255, 0.8)); }
+    }
+
+    /* 7. إخفاء زوائد ستريم ليت */
+    #MainMenu, footer, header { visibility: hidden; }
+
+    /* تخصيص الـ Spinner (التحميل) ليكون نيون */
+    .stSpinner > div {
+        border-top-color: #00f2ff !important;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -838,10 +844,6 @@ if choise == "Data Analysis" and df is not None and model_choice_auto == "ML":
             
         else:
             st.info("No suitable target column found automatically")
-if st.button("Run Full Analysis"):
-    # ... كود التحليل هنا ...
-    st.balloons()
-    st.success("Analysis Completed Successfully!")
 
 # ---------------- Auto AI System (Original) ----------------
 model_choise=None
