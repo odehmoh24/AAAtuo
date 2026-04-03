@@ -54,6 +54,28 @@ from nltk import ngrams
 from wordcloud import WordCloud
 import arabic_reshaper
 from bidi.algorithm import get_display
+
+import streamlit as st
+from streamlit_lottie import st_lottie
+import requests
+
+# دالة لتحميل الأنيميشن من رابط (URL)
+def load_lottieurl(url):
+    r = requests.get(url)
+    if r.status_code != 200:
+        return None
+    return r.json()
+
+# اختر أنيميشن يعبر عن الذكاء الاصطناعي أو البيانات
+# يمكنك البحث عن روابط أخرى في موقع LottieFiles
+lottie_ai_animation = load_lottieurl("https://assets10.lottiefiles.com/packages/lf20_prevwnu6.json")
+
+# عرض الأنيميشن في المكان الذي تريده (مثلاً في السايدبار أو الصفحة الرئيسية)
+with st.sidebar:
+    st_lottie(lottie_ai_animation, height=200, key="ai_sidebar")
+
+
+
 st.markdown("""
     <style>
     /* تغيير الخلفية للون كحلي داكن فخم */
