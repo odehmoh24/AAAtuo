@@ -56,33 +56,30 @@ import arabic_reshaper
 from bidi.algorithm import get_display
 st.markdown("""
     <style>
-    /* تغيير خلفية التطبيق والخطوط */
+    /* تغيير الخلفية للون كحلي داكن فخم */
     .stApp {
-        background-color: #f8f9fa;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #0e1117 0%, #161b22 100%);
+        color: #ffffff;
     }
     
-    /* تصميم مخصص للأزرار */
-    .stButton>button {
-        width: 100%;
-        border-radius: 10px;
-        height: 3em;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        transition: 0.3s;
-    }
-    .stButton>button:hover {
-        background-color: #0056b3;
-        transform: scale(1.02);
-    }
-    
-    /* تجميل الصناديق (Cards) */
-    div.stMetric {
-        background-color: #ffffff;
-        padding: 15px;
+    /* تجميل البطاقات (Cards) لتظهر بلمسة زجاجية */
+    div[data-testid="stMetric"] {
+        background-color: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 20px;
         border-radius: 15px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    }
+
+    /* تغيير لون النصوص داخل الـ Metrics */
+    div[data-testid="stMetricValue"] {
+        color: #00d4ff !important;
+    }
+
+    /* تحسين شكل السايدبار (Sidebar) */
+    section[data-testid="stSidebar"] {
+        background-color: #0d1117;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
     }
     </style>
     """, unsafe_allow_html=True)
