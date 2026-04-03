@@ -54,7 +54,38 @@ from nltk import ngrams
 from wordcloud import WordCloud
 import arabic_reshaper
 from bidi.algorithm import get_display
-
+st.markdown("""
+    <style>
+    /* تغيير خلفية التطبيق والخطوط */
+    .stApp {
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    /* تصميم مخصص للأزرار */
+    .stButton>button {
+        width: 100%;
+        border-radius: 10px;
+        height: 3em;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        transition: 0.3s;
+    }
+    .stButton>button:hover {
+        background-color: #0056b3;
+        transform: scale(1.02);
+    }
+    
+    /* تجميل الصناديق (Cards) */
+    div.stMetric {
+        background-color: #ffffff;
+        padding: 15px;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    </style>
+    """, unsafe_allow_status=True)
 
 
 df = None
