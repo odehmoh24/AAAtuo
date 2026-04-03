@@ -299,7 +299,7 @@ with st.sidebar:
         else:
             model_choice_auto = "ML"
 
-        st.success(f"🤖 AI Analysis: This dataset is best handled as **{model_choice_auto}**")
+        st.success(f" **{model_choice_auto}**")
 
 
     choise = st.selectbox("Service", ["  ", "Data Analysis", "Auto AI system", "Evaluation Visualization"])
