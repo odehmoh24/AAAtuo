@@ -59,21 +59,8 @@ import streamlit as st
 from streamlit_lottie import st_lottie
 import requests
 
-# دالة محسنة للتحميل مع معالجة الأخطاء
-def load_lottieurl(url: str):
-    try:
-        r = requests.get(url, timeout=5) # إضافة وقت انتظار لضمان عدم تعليق الكود
-        if r.status_code != 200:
-            return None
-        return r.json()
-    except:
-        return None
 
-# استخدم هذا الرابط (رابط مباشر ومستقر حالياً لذكاء اصطناعي)
-lottie_url = "https://lottie.host/8863f699-4d2b-4573-8321-72f1076b1070/fXm2FqV246.json"
-lottie_ai_animation = load_lottieurl(lottie_url)
 
-# التحقق: لا تعرض الأنيميشن إلا إذا نجح التحميل
 with st.sidebar:
     if lottie_ai_animation:
         st_lottie(lottie_ai_animation, height=200, key="ai_sidebar")
@@ -320,7 +307,39 @@ if 'suggested_models_list' not in st.session_state:
 
 
 
+import streamlit as st
+from streamlit_lottie import st_lottie
+import requests
 
+# 1. دالة التحميل المستقرة
+def load_lottieurl(url: str):
+    try:
+        r = requests.get(url, timeout=10)
+        if r.status_code != 200:
+            return None
+        return r.json()
+    except:
+        return None
+
+# 2. رابط أنيميشن "روبوت ذكاء اصطناعي" فخم وواضح جداً
+# هذا الرابط يعمل بشكل مباشر ومجرب
+lottie_welcome = load_lottieurl("https://lottie.host/8863f699-4d2b-4573-8321-72f1076b1070/fXm2FqV246.json")
+
+# 3. عرض الأنميشن في مقدمة الموقع (Main Page)
+if lottie_welcome:
+    # استخدام columns للتوسط (جعل الأنميشن في النص تماماً)
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st_lottie(lottie_welcome, height=300, key="welcome_robot")
+
+# 4. عنوان الموقع تحت الأنميشن مباشرة
+st.markdown("<h1 style='text-align: center;'>Auto AI System</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #888;'>الذكاء الاصطناعي لتحليل البيانات وتصنيفها تلقائياً</p>", unsafe_allow_html=True)
+
+st.divider() # خط فاصل ليبدأ بعده كود رفع الملفات
+
+# --- الآن يكمل بقية كودك (رفع الملفات والتحليل) ---
+# Data = st.file_uploader(...)
 
 
 
