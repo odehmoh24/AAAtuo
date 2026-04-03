@@ -177,51 +177,51 @@ with st.sidebar:
 
     if Data and df is not None:
     # الحصول على اسم الملف لفحص الامتداد
-    name = Data.name
+        name = Data.name
     
     # استخراج الأعمدة التي نوعها Object فقط (نصوص أو تصنيفات)
-    obj_cols = df.select_dtypes(include=['object']).columns
+        obj_cols = df.select_dtypes(include=['object']).columns
     
     # عدادات لتحديد كفة التصويت (NLP vs ML)
-    text_votes = 0
-    cat_votes = 0
+        text_votes = 0
+        cat_votes = 0
     
-    if len(obj_cols) > 0:
-        for col in obj_cols:
+        if len(obj_cols) > 0:
+            for col in obj_cols:
             # تنظيف البيانات من القيم المفقودة وأخذ عينة أول 100 صف للسرعة
-            sample = df[col].dropna().astype(str).head(100)
-            if sample.empty: continue
+                sample = df[col].dropna().astype(str).head(100)
+                if sample.empty: continue
             
             # حساب متوسط عدد الكلمات (أدق من طول الحروف في كشف المحتوى اللغوي)
-            avg_words = sample.str.split().str.len().mean()
+                avg_words = sample.str.split().str.len().mean()
             
             # نسبة القيم الفريدة (Unique Ratio) للكشف عن التكرار (Categorical Data)
-            unique_ratio = sample.nunique() / len(sample)
+                unique_ratio = sample.nunique() / len(sample)
             
             # فحص وجود مسافات (مؤشر قوي على وجود جمل لغوية مفيدة وليس أكواد أو معرفات)
-            has_spaces = sample.str.contains(' ').mean()
+                has_spaces = sample.str.contains(' ').mean()
 
             # شرط التصنيف: إذا كانت الكلمات كثيرة والتفرد عالٍ أو توجد جمل بمساحات
-            if avg_words > 10 and (unique_ratio > 0.5 or has_spaces > 0.8):
-                text_votes += 1  # تصويت لصالح معالجة اللغات الطبيعية
-            else:
-                cat_votes += 1   # تصويت لصالح تعلم الآلة التقليدي
+                if avg_words > 10 and (unique_ratio > 0.5 or has_spaces > 0.8):
+                    text_votes += 1  # تصويت لصالح معالجة اللغات الطبيعية
+                else:
+                    cat_votes += 1   # تصويت لصالح تعلم الآلة التقليدي
         
         # اتخاذ القرار النهائي بناءً على نتيجة التصويت الكلية للأعمدة
-        if name.endswith(".txt"):
-            model_choice_auto = "NLP"
-        elif text_votes >= 1 and len(df.columns) <= 3:
+            if name.endswith(".txt"):
+                model_choice_auto = "NLP"
+            elif text_votes >= 1 and len(df.columns) <= 3:
             # إذا كان الجدول صغيراً وبه عمود نصي واحد على الأقل فهو غالباً مهمة NLP
-            model_choice_auto = "NLP"
-        elif text_votes > cat_votes:
+                model_choice_auto = "NLP"
+            elif text_votes > cat_votes:
             # إذا كانت أغلب الأعمدة النصية هي "نصوص طويلة" وليست "تصنيفات"
-            model_choice_auto = "NLP"
-        else:
+                model_choice_auto = "NLP"
+            else:
             # الافتراضي هو ML في حال كانت البيانات قصيرة أو متكررة
-            model_choice_auto = "ML"
-    else:
+                model_choice_auto = "ML"
+        else:
         # في حال كانت البيانات أرقاماً بالكامل (No Object Columns)
-        model_choice_auto = "ML"
+            model_choice_auto = "ML"
 
     # عرض النتيجة النهائية للمستخدم في الواجهة
     st.success(f"🤖 AI Analysis: This dataset is best handled as **{model_choice_auto}**")
