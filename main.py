@@ -253,7 +253,7 @@ def load_file_as_csv(Data):
 # --- Sidebar ---
 with st.sidebar:
     st.title("Auto AI System")
-    st.image("logo.png")
+    st.image("loggo.png")
     Data = st.file_uploader("Upload CSV, Excel, JSON or TXT", type=["csv","xls","xlsx","json","txt"])
     if Data:
         st.session_state.df = load_file(Data)
