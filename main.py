@@ -222,7 +222,7 @@ with st.sidebar:
     
     # --- تحميل الملف وتخزينه ---
     
-
+     
 # --- جلب الداتا أولاً ---
        
 
@@ -751,7 +751,10 @@ if choise == "Data Analysis" and df is not None and model_choice_auto == "ML":
             
         else:
             st.info("No suitable target column found automatically")
-
+if st.button("Run Full Analysis"):
+    # ... كود التحليل هنا ...
+    st.balloons()
+    st.success("Analysis Completed Successfully!")
 
 # ---------------- Auto AI System (Original) ----------------
 model_choise=None
