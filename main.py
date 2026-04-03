@@ -224,7 +224,7 @@ with st.sidebar:
             model_choice_auto = "ML"
 
     # عرض النتيجة النهائية للمستخدم في الواجهة
-    st.success(f"🤖 AI Analysis: This dataset is best handled as **{model_choice_auto}**")
+    st.success(f"{model_choice_auto}**")
 
 
     choise = st.selectbox("Service", ["  ", "Data Analysis", "Auto AI system", "Evaluation Visualization"])
