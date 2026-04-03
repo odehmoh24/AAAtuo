@@ -315,22 +315,15 @@ import requests
 def load_lottieurl(url: str):
     try:
         r = requests.get(url, timeout=10)
-        if r.status_code != 200:
-            return None
-        return r.json()
+        return r.json() if r.status_code == 200 else None
     except:
         return None
+# يمكنك تغيير الرابط لأي أنميشن آخر من موقع LottieFiles
+lottie_url = "https://lottie.host/8863f699-4d2b-4573-8321-72f1076b1070/fXm2FqV246.json"
+lottie_ai = load_lottieurl(lottie_url)		
 
-# 2. رابط أنيميشن "روبوت ذكاء اصطناعي" فخم وواضح جداً
-# هذا الرابط يعمل بشكل مباشر ومجرب
-lottie_welcome = load_lottieurl("https://lottie.host/8863f699-4d2b-4573-8321-72f1076b1070/fXm2FqV246.json")
-
-# 3. عرض الأنميشن في مقدمة الموقع (Main Page)
-if lottie_welcome:
-    # استخدام columns للتوسط (جعل الأنميشن في النص تماماً)
-    col1, col2, col3 = st.columns([1, 2, 1])
-    with col2:
-        st_lottie(lottie_welcome, height=300, key="welcome_robot")
+if lottie_ai:
+    st_lottie(lottie_ai, height=300, key="main_anim")
 
 # 4. عنوان الموقع تحت الأنميشن مباشرة
 st.markdown("<h1 style='text-align: center;'>Auto AI System</h1>", unsafe_allow_html=True)
