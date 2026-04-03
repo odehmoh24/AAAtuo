@@ -647,11 +647,13 @@ if choise == "Data Analysis" and df is not None and model_choice_auto == "ML":
             if col_name == "Has Outliers" and val == True:
                 return "background-color: red; color: white"
             return ""
-        styled_df = (summary_df.style
-             .map(lambda val: highlight_issues(val, "Has Outliers"), subset=["Has Outliers"])
-             .map(lambda val: highlight_issues(val, "Has Significant Missing"), subset=["Has Significant Missing"])
-				)
-        st.dataframe(styled_df, use_container_width=True)
+    styled_df = (
+        summary_df.style
+        .map(lambda val: highlight_issues(val, "Has Outliers"), subset=["Has Outliers"])
+        .map(lambda val: highlight_issues(val, "Has Significant Missing"), subset=["Has Significant Missing"])
+     )
+
+st.dataframe(styled_df, use_container_width=True)
 
     # ---------------- Outliers ----------------
     with tab_outliers:
